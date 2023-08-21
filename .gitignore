@@ -1,0 +1,7 @@
+
+Tredi.API/obj*
+Tredi.API/bin*
+appsettings.Development.json
+*.suo
+*.user
+.vs/*
