@@ -64,12 +64,7 @@ namespace Tredi.API.DataServices
 				throw new Exception("PASSWORD_MISMATCH");
 			}
 
-			return new UserDto()
-			{
-				Id = user.Id,
-				UserName = user.UserName,
-				Name = user.Name
-			};
+			return new UserDto(user);		
 		}
 	}
 }
