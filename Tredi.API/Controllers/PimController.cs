@@ -16,6 +16,14 @@ namespace Tredi.API.Controllers
 		{
 			this.dataServices = dataServices;
 		}
+		
+		[Authorize]
+		[HttpGet("LoadAttributes")]
+		public async Task<ActionResult> LoadAttributes()
+		{
+			var attributeList = await dataServices.PimService.LoadAttributes();
+			return Ok(attributeList);
+		}
 
 		[Authorize]
 		[HttpPost("AddAttribute")]
@@ -26,11 +34,21 @@ namespace Tredi.API.Controllers
 		}
 
 		[Authorize]
-		[HttpGet("LoadAttributes")]
-		public async Task<ActionResult> LoadAttributes()
+		[HttpPost("EditAttribute")]
+		public async Task<ActionResult> EditAttribute([FromBody] AttributeDto attribute)
 		{
-			var attributeList = await dataServices.PimService.LoadAttributes();
-			return Ok(attributeList);
+			var result = await dataServices.PimService.EditAttribute(attribute);
+			return Ok(result);
 		}
+
+		[Authorize]
+		[HttpPost("DeleteAttribute")]
+		public async Task<ActionResult> DeleteAttribute([FromBody] AttributeDto attribute)
+		{
+			var result = await dataServices.PimService.DeleteAttribute(attribute);
+			return Ok(result);
+		}
+
+
 	}
 }

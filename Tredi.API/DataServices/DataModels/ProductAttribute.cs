@@ -12,7 +12,6 @@ namespace Tredi.API.DataServices.DataModels
 		public string Id { get; set; }
 
 		public string Name { get; set; }
-		public string Label { get; set; }
 		public bool IsActive { get; set; }
 		public AttributeTypeEnum AttributeType { get; set; } = AttributeTypeEnum.TEXTHTML;
 
@@ -20,10 +19,13 @@ namespace Tredi.API.DataServices.DataModels
 
 		public ProductAttribute(AttributeDto attributeDto)
 		{
-			PartitionKey = "Attribute";
-			Id = Guid.NewGuid().ToString();
+			PartitionKey = attributeDto.PartitionKey;
+			if (string.IsNullOrWhiteSpace(PartitionKey)) PartitionKey = "Attribute";
+
+			Id = attributeDto.Id;
+			if (string.IsNullOrWhiteSpace(Id)) Id = Guid.NewGuid().ToString();
+
 			Name = attributeDto.Name;
-			Label = attributeDto.Label;
 			IsActive = true;
 			AttributeType = attributeDto.AttributeType;
 		}

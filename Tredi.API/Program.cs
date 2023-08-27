@@ -23,14 +23,16 @@ builder.Services.AddAuthentication(config =>
 }).AddCookie("TrediCooking", options =>
 {
 	options.Cookie.Name = "TrediCooking";
-}).AddOAuth("TrediServer", config =>
-{
-	config.ClientId = "23817346881-igsa29j1f9e1vm128q86kf7ai94ii6tm.apps.googleusercontent.com";
-	config.ClientSecret = "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";
-	config.CallbackPath = "/Authentication/OauthCallback";
-	config.AuthorizationEndpoint = "http://localhost:7171/Authentication/Authorize";
-	config.TokenEndpoint = "http://localhost:7171/Authentication/Token";
 });
+
+//.AddOAuth("TrediServer", config =>
+//{
+//	config.ClientId = "23817346881-igsa29j1f9e1vm128q86kf7ai94ii6tm.apps.googleusercontent.com";
+//	config.ClientSecret = "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";
+//	config.CallbackPath = "/Authentication/OauthCallback";
+//	config.AuthorizationEndpoint = "http://localhost:7171/Authentication/Authorize";
+//	config.TokenEndpoint = "http://localhost:7171/Authentication/Token";
+//});
 
 //builder.Services.AddAuthentication().AddGoogle(gOptions => { 
 //	gOptions.ClientId = "23817346881-igsa29j1f9e1vm128q86kf7ai94ii6tm.apps.googleusercontent.com";

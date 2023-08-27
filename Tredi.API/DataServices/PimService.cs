@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Tredi.API.DataServices.DataModels;
 using Tredi.API.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Tredi.API.DataServices
 {
@@ -18,15 +19,6 @@ namespace Tredi.API.DataServices
 			Database database = await _client.CreateDatabaseIfNotExistsAsync("TrediDB");
 			return await database.CreateContainerIfNotExistsAsync("Attribute", "/PartitionKey");
 		}
-
-		public async Task<bool> AddAttribute(AttributeDto attributeDto)
-		{
-			var attribute = new ProductAttribute(attributeDto);
-			var container = await LoadContainer();
-			var createdResponse = await container.CreateItemAsync(attribute, new PartitionKey(attribute.PartitionKey));
-			return createdResponse.StatusCode == System.Net.HttpStatusCode.OK;
-		}
-
 		public async Task<List<AttributeDto>> LoadAttributes()
 		{
 			var container = await LoadContainer();
@@ -38,6 +30,31 @@ namespace Tredi.API.DataServices
 				attributes.ForEach(a => { dtoList.Add(new AttributeDto(a)); });
 			}
 			return dtoList;
+		}
+
+		public async Task<bool> AddAttribute(AttributeDto attributeDto)
+		{
+			var attribute = new ProductAttribute(attributeDto);
+			var container = await LoadContainer();
+			var createdResponse = await container.CreateItemAsync(attribute, new PartitionKey(attribute.PartitionKey));
+			return createdResponse.StatusCode == System.Net.HttpStatusCode.OK;
+		}
+
+		public async Task<bool> EditAttribute(AttributeDto attributeDto)
+		{
+			var attribute = new ProductAttribute(attributeDto);
+			var container = await LoadContainer();
+			var createdResponse = await container.UpsertItemAsync(attribute, new PartitionKey(attribute.PartitionKey));
+			return createdResponse.StatusCode == System.Net.HttpStatusCode.OK;
+		}
+
+		public async Task<bool> DeleteAttribute(AttributeDto attributeDto)
+		{
+			var attribute = new ProductAttribute(attributeDto);
+			attribute.IsActive = false;
+			var container = await LoadContainer();
+			var createdResponse = await container.UpsertItemAsync(attribute, new PartitionKey(attribute.PartitionKey));
+			return createdResponse.StatusCode == System.Net.HttpStatusCode.OK;
 		}
 	}
 }
