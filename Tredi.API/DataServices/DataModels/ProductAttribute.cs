@@ -12,6 +12,7 @@ namespace Tredi.API.DataServices.DataModels
 		public string Id { get; set; }
 
 		public string Name { get; set; }
+		public string Label { get; set; }
 		public bool IsActive { get; set; }
 		public AttributeTypeEnum AttributeType { get; set; } = AttributeTypeEnum.TEXTHTML;
 
@@ -26,6 +27,7 @@ namespace Tredi.API.DataServices.DataModels
 			if (string.IsNullOrWhiteSpace(Id)) Id = Guid.NewGuid().ToString();
 
 			Name = attributeDto.Name;
+			Label = attributeDto.Label;
 			IsActive = true;
 			AttributeType = attributeDto.AttributeType;
 		}
