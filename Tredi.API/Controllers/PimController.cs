@@ -49,6 +49,38 @@ namespace Tredi.API.Controllers
 			return Ok(result);
 		}
 
+		[Authorize]
+		[HttpGet("LoadProducts")]
+		public async Task<ActionResult> LoadProducts()
+		{
+			var productList = await dataServices.PimService.LoadProducts();
+			return Ok(productList);
+		}
+
+		[Authorize]
+		[HttpPost("AddProduct")]
+		public async Task<ActionResult> AddProduct([FromBody] ProductDto product)
+		{
+			var result = await dataServices.PimService.AddProduct(product);
+			return Ok(result);
+		}
+
+		[Authorize]
+		[HttpPost("EditProduct")]
+		public async Task<ActionResult> EditProduct([FromBody] ProductDto product)
+		{
+			var result = await dataServices.PimService.EditProduct(product);
+			return Ok(result);
+		}
+
+		[Authorize]
+		[HttpPost("DeleteProduct")]
+		public async Task<ActionResult> DeleteProduct([FromBody] ProductDto product)
+		{
+			var result = await dataServices.PimService.DeleteProduct(product);
+			return Ok();
+		}
+
 
 	}
 }

@@ -8,11 +8,12 @@ namespace Tredi.API.Models
 		public string? Id { get; set; }
 		public string? Name { get; set; }
 		public string? Label { get; set; }
+		public string? Value { get; set; }
 		public AttributeTypeEnum AttributeType { get; set; } = AttributeTypeEnum.TEXTHTML;
 
 		public AttributeDto() { }
 
-		public AttributeDto(ProductAttribute attribute)
+		public AttributeDto(DataServices.DataModels.Attribute attribute)
 		{
 			if (attribute != null)
 			{
@@ -21,6 +22,15 @@ namespace Tredi.API.Models
 				Name = attribute.Name;
 				Label = attribute.Label;
 				AttributeType = attribute.AttributeType;
+			}
+		}
+
+		public AttributeDto(ProductAttribute productAttribute)
+		{
+			if (productAttribute != null)
+			{
+				Id = productAttribute.AttributeId;
+				Value = productAttribute.Value;
 			}
 		}
 	}

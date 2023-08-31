@@ -11,25 +11,25 @@ namespace Tredi.API.DataServices.DataModels
 		[JsonProperty(PropertyName = "id")]
 		public string Id { get; set; }
 
-		public string Name { get; set; }
-		public string Label { get; set; }
-		public bool IsActive { get; set; }
-		public AttributeTypeEnum AttributeType { get; set; } = AttributeTypeEnum.TEXTHTML;
+		public string ProductId { get; set; }
+		public string AttributeId { get; set; }
+		public bool IsActive { get; set; } = true;
+		public string Value { get; set; }
 
 		public ProductAttribute() { }
 
-		public ProductAttribute(AttributeDto attributeDto)
+		public ProductAttribute(string productId, AttributeDto attributeDto)
 		{
-			PartitionKey = attributeDto.PartitionKey;
-			if (string.IsNullOrWhiteSpace(PartitionKey)) PartitionKey = "Attribute";
-
-			Id = attributeDto.Id;
-			if (string.IsNullOrWhiteSpace(Id)) Id = Guid.NewGuid().ToString();
-
-			Name = attributeDto.Name;
-			Label = attributeDto.Label;
+			PartitionKey = "ProductAttribute";
+			Id = Guid.NewGuid().ToString();
+			ProductId = productId;
 			IsActive = true;
-			AttributeType = attributeDto.AttributeType;
+
+			if (attributeDto != null)
+			{
+				AttributeId = attributeDto.Id;
+				Value = attributeDto.Value;
+			}
 		}
 	}
 }
