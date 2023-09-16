@@ -14,7 +14,7 @@ namespace Tredi.API.DataServices.DataModels
 		public string ProductId { get; set; }
 		public string AttributeId { get; set; }
 		public bool IsActive { get; set; } = true;
-		public string Value { get; set; }
+		public string? Value { get; set; }
 
 		public ProductAttribute() { }
 
@@ -28,7 +28,7 @@ namespace Tredi.API.DataServices.DataModels
 			if (attributeDto != null)
 			{
 				AttributeId = attributeDto.Id;
-				Value = attributeDto.Value;
+				Value = attributeDto.ValueStr;
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Security.AccessControl;
 using Tredi.API.Models;
 
 namespace Tredi.API.DataServices.DataModels
@@ -13,6 +14,7 @@ namespace Tredi.API.DataServices.DataModels
 
 		public string Name { get; set; }
 		public string Label { get; set; }
+		public string ValueStr { get; set; }
 		public bool IsActive { get; set; } = true;
 		public AttributeTypeEnum AttributeType { get; set; } = AttributeTypeEnum.TEXTHTML;
 
@@ -38,6 +40,7 @@ namespace Tredi.API.DataServices.DataModels
 				Name = attributeDto.Name;
 				Label = attributeDto.Label;
 				AttributeType = attributeDto.AttributeType;
+				ValueStr = attributeDto.ValueStr;
 			}
 		}
 	}

@@ -18,7 +18,7 @@ namespace Tredi.API.DataServices.DataModels
 		public Product(ProductDto productDto)
 		{
 			PartitionKey = "Product";
-			Id = (DateTime.Now.Ticks - new DateTime(2023, 08, 31).Ticks).ToString("x");
+			Id = (DateTime.Now.Ticks - new DateTime(2023, 08, 31).Ticks).ToString("x"); //sku generator
 
 			if (productDto != null)
 			{
